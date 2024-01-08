@@ -12,4 +12,6 @@ RUN pip install -r requirements.txt
 
 # RUN pip install line-bot-sdk flask
 
-RUN python app.py
+CMD [ "python","app.py" ]
+
+# RUN python app.py
