@@ -9,7 +9,7 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 line_bot_api = LineBotApi('XG2BHeGYWeIAd5H9zX6jM8tdH3dSm3m+vb5kl74qWl5uQpqST8N4m2DiScsIaYi61vjUM3fbjbLmrjkdq7CBJ1oPHh8x8Tlv3HQtP7fx5IuKuYzlr/Y6XIc1XXJeFPSGsjUlRjzky4J/YkmIMPFwQwdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('8c8eec4610aa229d3112cc45bb1c1b6f')
 
-@app.route("/helloworld")
+@app.route("/helloworld",methods=['GET'])
 def hello():
     return "Hello World!"
 
