@@ -39,7 +39,7 @@ services:
   # Cloudflare tunnel Service
   cloudflare:
     image: cloudflare/cloudflared:latest
-    command: tunnel --no-autoupdate run --token ${CF_TOKEN}
+    command: tunnel --no-autoupdate run --token ${CF_TOKEN} --url http://linebot.nycu.site:80
     restart: always
     environment:
       - CF_TOKEN=pvZzYayl_UIVEQrnuWKPjGj9bf3z-AmOnaWl0u5f
