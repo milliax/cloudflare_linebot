@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+
+  # linebot backend Service
+  flask:
+    build: './flask_docker/'
+    volumes:
+      - ./www/:/var/www/html/
+
+  # Nginx Service
+  nginx:
+    build: './nginx/'
+    depends_on:
+      - flask
+    ports:
+      - "80:80"
+    # volumes:
+    #   - ./www/:/var/www/html/
+
+  # Cloudflare tunnel Service
+  cloudflare:
+    image: cloudflare/cloudflared
+    command: tunnel --url http://linebot.nycu.site:80
+    depends_on:
+      - apache
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - TUNNEL_HOSTNAME=nycu.site
+      - TUNNEL_URL=http://linebot.nycu.site:80
+      - TUNNEL_METRICS=0
+      - TUNNEL_LOGLEVEL=info
+      - TUNNEL_PROTOCOL=quic
+      - TUNNEL_ORIGIN_CERT=/etc/cloudflared/cert.pem
+    volumes:
+      - ./cert.pem:/etc/cloudflared/cert.pem
+
+# Volumes
+# volumes:
+#   mysqldata:
