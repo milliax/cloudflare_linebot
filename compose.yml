@@ -49,12 +49,9 @@ services:
     environment:
       - TUNNEL_HOSTNAME=nycu.site
       - TUNNEL_URL=http://linebot.nycu.site:80
-      - TUNNEL_METRICS=0
-      - TUNNEL_LOGLEVEL=info
-      - TUNNEL_PROTOCOL=quic
-      - TUNNEL_ORIGIN_CERT=/etc/cloudflared/cert.pem
-    volumes:
-      - ./cert.pem:/etc/cloudflared/cert.pem
+      - TUNNEL_TOKEN=pvZzYayl_UIVEQrnuWKPjGj9bf3z-AmOnaWl0u5f
+    # volumes:
+    #   - ./cert.pem:/etc/cloudflared/cert.pem
 
 # Volumes
 # volumes:
