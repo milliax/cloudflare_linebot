@@ -38,19 +38,25 @@ services:
 
   # Cloudflare tunnel Service
   cloudflare:
-    image: cloudflare/cloudflared
-    command: tunnel --url http://linebot.nycu.site:80
-    depends_on:
-      - flask
-    ports:
-      - "8000:80"
-      # - "443:443"
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${CF_TOKEN}
+    restart: always
     environment:
-      - TUNNEL_HOSTNAME=nycu.site
-      - TUNNEL_URL=http://linebot.nycu.site:80
-      - TUNNEL_TOKEN=pvZzYayl_UIVEQrnuWKPjGj9bf3z-AmOnaWl0u5f
-    # volumes:
-    #   - ./cert.pem:/etc/cloudflared/cert.pem
+      - CF_TOKEN=pvZzYayl_UIVEQrnuWKPjGj9bf3z-AmOnaWl0u5f
+  #   image: cloudflare/cloudflared
+  #   command: tunnel --url http://linebot.nycu.site:80
+  #   depends_on:
+  #     - flask
+  #   ports:
+  #     - "8000:80"
+  #     # - "443:443"
+  #   environment:
+  #     - TUNNEL_HOSTNAME=nycu.site
+  #     - TUNNEL_URL=http://linebot.nycu.site:80
+  #     - TUNNEL_TOKEN=pvZzYayl_UIVEQrnuWKPjGj9bf3z-AmOnaWl0u5f
+  #   # volumes:
+  #   #   - ./cert.pem:/etc/cloudflared/cert.pem
+    
 
 # Volumes
 # volumes:
