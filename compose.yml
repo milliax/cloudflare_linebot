@@ -2,15 +2,27 @@ version: "3.8"
 services:
 
   # linebot backend Service
+  # flask:
+  #   # image: api-flask
+  #   build: './flask/'
+  #   # ports:
+  #   #   - "8000:8000"
+  #   volumes:
+  #     - ./flask/.env://api-flask/.env
+  #   expose:
+  #     - "5000"
+
   flask:
-    image: api-flask
-    # build: './flask/'
-    # ports:
-    #   - "8000:8000"
+    build: "./flask/"
     volumes:
-      - ./flask/.env://api-flask/.env
-    expose:
-      - "5000"
+      - ./flask:/app
+    ports:
+      - "8000:8000"
+    environment:
+      # - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+    command: python app.py
 
   # Nginx Service
   nginx:
