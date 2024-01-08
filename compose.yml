@@ -44,7 +44,6 @@ services:
       - flask
     ports:
       - "8000:80"
-      - "8000:443"
       # - "443:443"
     environment:
       - TUNNEL_HOSTNAME=nycu.site
