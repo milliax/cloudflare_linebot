@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# This script is used to start the application.
+
+sudo docker compose up -d --build

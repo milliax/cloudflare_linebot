@@ -1,23 +1,11 @@
 version: "3.8"
 services:
-
-  # linebot backend Service
-  # flask:
-  #   # image: api-flask
-  #   build: './flask/'
-  #   # ports:
-  #   #   - "8000:8000"
-  #   volumes:
-  #     - ./flask/.env://api-flask/.env
-  #   expose:
-  #     - "5000"
-
   flask:
     build: "./flask/"
     volumes:
       - ./flask:/app
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8001:8000"
     environment:
       # - FLASK_ENV=development
       - FLASK_APP=app.py
@@ -26,17 +14,18 @@ services:
 
   # Nginx Service
   nginx:
-    # depends_on:
-    #   - flask
     image: nginx
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-    ports:
-      - "80:80"
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/static:/home/www-data/
+    # ports:
+    #   - "8080:80"
+    # Because of cloudflare is now portwording the port 8000
     # volumes:
     #   - ./www/:/var/www/html/
 
   # Cloudflare tunnel Service
+
   cloudflare:
     image: cloudflare/cloudflared:latest
     # command: tunnel --no-autoupdate run --token ${CF_TOKEN} --url http://linebot.nycu.site:80
@@ -44,21 +33,4 @@ services:
     restart: always
     environment:
       - CF_TOKEN=${CF_TOKEN}
-  #   image: cloudflare/cloudflared
-  #   command: tunnel --url http://linebot.nycu.site:80
-  #   depends_on:
-  #     - flask
-  #   ports:
-  #     - "8000:80"
-  #     # - "443:443"
-  #   environment:
-  #     - TUNNEL_HOSTNAME=nycu.site
-  #     - TUNNEL_URL=http://linebot.nycu.site:80
-  #     - TUNNEL_TOKEN=pvZzYayl_UIVEQrnuWKPjGj9bf3z-AmOnaWl0u5f
-  #   # volumes:
-  #   #   - ./cert.pem:/etc/cloudflared/cert.pem
     
-
-# Volumes
-# volumes:
-#   mysqldata:
