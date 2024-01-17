@@ -45,7 +45,7 @@ def handle_message(event):
                 output = output + column[i] + ":" + data['weatherElement'][i]['time'][0]['parameter']['parameterName'] + "\n"
             break
     else:
-        output = "請輸入正確的地名"
+        output = "請輸入正確的地名(需加上縣市別)"
     
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=output))
 
